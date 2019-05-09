@@ -79,6 +79,26 @@ int scan(char* input){
                 state = 3;
             else if (isNumber(cur))
                 state = 12;
+            else if (cur == '+')
+                state = 37;
+            else if (cur == '-')
+                state = 38;
+            else if (cur == '*')
+                state = 39;
+            else if (cur == '/')
+                state = 40;
+            else if (cur == '<')
+                state = 41;
+            else if (cur == '>')
+                state = 42;
+            else if (cur == '(')
+                state = 43;
+            else if (cur == ')')
+                state = 44;
+            else if (cur == '=')
+            	state = 45;
+            else if (cur == ';')
+            	state = 46;
             else
                 state = 99;
             break;
@@ -279,6 +299,66 @@ int scan(char* input){
                 state = 0;
             }
             break;
+        case 37:
+            cout << "<+,_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
+        case 38:
+            cout << "<-,_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
+        case 39:
+            cout << "<*,_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
+        case 40:
+            cout << "</,_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
+        case 41:
+            cout << "<<,_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
+        case 42:
+            cout << "<>,_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
+        case 43:
+            cout << "<(,_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
+        case 44:
+            cout << "<),_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
+        case 45:
+            cout << "<=,_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
+        case 46:
+            cout << "<;,_>\n";
+            buf = "";
+            index--;
+            state = 0;
+            break;
         case 99:
         default:
             cout << "error\n";
@@ -298,6 +378,6 @@ int scan(char* input){
 
 int main(){
     //char *test = "BEGIN DEC10 0 123 OCT8 00  070 HEX16 0x0 0xD1023 0X9F9 0x10a END";
-    char *test = "if do else then while while1 whilee whill wwhile";
+    char *test = "if () do ; else then ; while() while1 whilee whill wwhile";
     scan(test);
 }
