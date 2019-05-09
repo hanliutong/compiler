@@ -121,9 +121,10 @@ int scan(char* input){
         case 3:
             if (cur == '0'){//state 5
                 buf += cur;
-                cout << "<INT8," << buf << ">\n";
+                //cout << "<INT8," << buf << ">\n";
                 buf = "";
                 state = 0;
+                return 8;
             }
             else if(is1to7(cur))
                 state = 6;
@@ -143,18 +144,20 @@ int scan(char* input){
                 state = 6;
             else
             {// state 7
-                cout << "<INT8," << buf << ">\n";
+                //cout << "<INT8," << buf << ">\n";
                 buf = "";
                 index--;
                 state = 0;
+                return 8;
             }
             break;
         case 8:
             if (cur == '0'){//state 9
                 buf += cur;
-                cout << "<INT16," << buf << ">\n";
+                //cout << "<INT16," << buf << ">\n";
                 buf = "";
                 state = 0;
+                return 16;
             }
             else if(is1toF(cur))
                 state = 10;
@@ -165,10 +168,11 @@ int scan(char* input){
             if(cur == '0' || is1toF(cur))
                 state =10;
             else{//state 11
-                cout << "<INT16," << buf << ">\n";
+                //cout << "<INT16," << buf << ">\n";
                 buf = "";
                 index--;
                 state = 0;
+                return 16;
             }
             break;
         case 12:
@@ -192,10 +196,11 @@ int scan(char* input){
             if (isLetter(cur) || isNumber(cur))
                 state = 1;
             else{//state 17
-                cout << "<IF,_>\n";
+                //cout << "<IF,_>\n";
                 buf = "";
                 index--;
                 state = 0;
+                return 3;
             }
             break;
         case 18:
@@ -208,10 +213,11 @@ int scan(char* input){
             if (isLetter(cur) || isNumber(cur))
                 state = 1;
             else{//state 20
-                cout << "<DO,_>\n";
+                //cout << "<DO,_>\n";
                 buf = "";
                 index--;
                 state = 0;
+                return 3;
             }
             break; 
         case 21:
@@ -236,10 +242,11 @@ int scan(char* input){
             if (isLetter(cur) || isNumber(cur))
                 state = 1;
             else{//state 24
-                cout << "<ELSE,_>\n";
+                //cout << "<ELSE,_>\n";
                 buf = "";
                 index--;
                 state = 0;
+                return 3;
             }
             break;
         case 26:
@@ -264,10 +271,11 @@ int scan(char* input){
             if (isLetter(cur) || isNumber(cur))
                 state = 1;
             else{//state 30
-                cout << "<THEN,_>\n";
+                //cout << "<THEN,_>\n";
                 buf = "";
                 index--;
                 state = 0;
+                return 3;
             }
             break;
         case 31:
@@ -298,14 +306,15 @@ int scan(char* input){
             if (isLetter(cur) || isNumber(cur))
                 state = 1;
             else{//state 36
-                cout << "<WHILE,_>\n";
+                //cout << "<WHILE,_>\n";
                 buf = "";
                 index--;
                 state = 0;
+                return 3;
             }
             break;
         case 37:
-            //cout << "<+,_>\n";
+            cout << "<+,_>\n";
             buf = "";
             index--;
             state = 0;
@@ -342,16 +351,18 @@ int scan(char* input){
             state = 0;
             break;
         case 43:
-            cout << "<(,_>\n";
+            //cout << "<(,_>\n";
             buf = "";
             index--;
             state = 0;
+            return 2;
             break;
         case 44:
-            cout << "<),_>\n";
+            //cout << "<),_>\n";
             buf = "";
             index--;
             state = 0;
+            return 2;
             break;
         case 45:
             cout << "<=,_>\n";
@@ -360,11 +371,12 @@ int scan(char* input){
             state = 0;
             break;
         case 46:
-            cout << "<;,_>\n";
+            //cout << "<;,_>\n";
             buf = "";
             index--;
             state = 0;
-            break;
+            return 2;
+			break;
         case 99:
         default:
             cout << "error\n";
@@ -400,10 +412,7 @@ int main(){
 	printf("\n");
     char *test = "BEGIN DEC10 0 123 00 070 0x0 0xD1023 END if () do ; else while1";
     //char *test = "if () do ; else then ; while() while1 whilee whill wwhile";
-    while(test != NULL){
-		cout << scan("BEGIN DEC10") << endl;
-		
-	}
+
 	
 	
 }
