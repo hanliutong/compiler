@@ -412,7 +412,15 @@ int main(){
 	printf("\n");
     char *test = "BEGIN DEC10 0 123 00 070 0x0 0xD1023 END if () do ; else while1";
     //char *test = "if () do ; else then ; while() while1 whilee whill wwhile";
-
+    while(test != NULL){
+//    	cout << test << "-> scan \n";
+		cout << scan(test) << endl;
+		while(*test != ' '){
+			test++;
+//			cout << test << "-> in \n";
+		}
+		test++;
+	}
 	
 	
 }
