@@ -1,5 +1,6 @@
 #include <iostream>
-#include <string.h>
+#include <stdlib.h>
+//#include <string.h>
 using namespace std;
 
 bool isLetter(char input){
@@ -106,12 +107,14 @@ int scan(char* input){
             if (isLetter(cur) || (isNumber(cur)))
                 state = 1;
             else{//state 2
-                cout << "<IDT," << buf << ">\n";
+            	//cout << "<IDN," << buf << ">\n";
                 buf = "";
                 index--;
                 state = 0;
+                return 1;
             }
             break;
+            
         case 2:
 
             break;
@@ -128,11 +131,12 @@ int scan(char* input){
                 state = 8;
             else
             { // state 4;
-                cout << "<INT10," << buf << ">\n";
+                //cout << "<INT10," << buf << ">\n";
                 buf = "";
                 index--;
                 state = 0;
-            }
+                return 10;
+			}
             break;
         case 6:
             if (cur == '0' || is1to7(cur))
@@ -171,10 +175,11 @@ int scan(char* input){
             if (cur == '0' || isNumber(cur))
                 state = 12;
             else{// state 7
-                cout << "<INT10," << buf << ">\n";
+                //cout << "<INT10," << buf << ">\n";
                 buf = "";
                 index--;
                 state = 0;
+                return 10;
             }
             break;
         case 15:
@@ -300,10 +305,11 @@ int scan(char* input){
             }
             break;
         case 37:
-            cout << "<+,_>\n";
+            //cout << "<+,_>\n";
             buf = "";
             index--;
             state = 0;
+            return 2;
             break;
         case 38:
             cout << "<-,_>\n";
@@ -377,7 +383,27 @@ int scan(char* input){
 }
 
 int main(){
-    //char *test = "BEGIN DEC10 0 123 OCT8 00  070 HEX16 0x0 0xD1023 0X9F9 0x10a END";
-    char *test = "if () do ; else then ; while() while1 whilee whill wwhile";
-    scan(test);
+	printf("词法分析器输出类型说明:\n");
+
+	printf("1：标识符\n");
+
+	printf("2：运算符\n");
+	
+	printf("3：关键字\n");
+
+	printf("8：八进制数\n");
+
+	printf("10：十进制数\n");
+
+	printf("16：十六进制数\n");
+	
+	printf("\n");
+    char *test = "BEGIN DEC10 0 123 00 070 0x0 0xD1023 END if () do ; else while1";
+    //char *test = "if () do ; else then ; while() while1 whilee whill wwhile";
+    while(test != NULL){
+		cout << scan("BEGIN DEC10") << endl;
+		
+	}
+	
+	
 }
