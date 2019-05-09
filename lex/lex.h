@@ -2,6 +2,7 @@
 #include <stdlib.h>
 //#include <string.h>
 using namespace std;
+int AAA1 = 100;
 
 bool isLetter(char input){
     if (input >= 'A' && input <= 'Z')
@@ -52,8 +53,7 @@ bool isOperator(char input){
     else
         return false;
 }
-
-int scan(char* input){
+int scan(char*& input){
     int state = 0;
     int index = 0;
     char cur = input[index];
@@ -107,10 +107,8 @@ int scan(char* input){
             if (isLetter(cur) || (isNumber(cur)))
                 state = 1;
             else{//state 2
-            	//cout << "<IDN," << buf << ">\n";
-                buf = "";
-                index--;
-                state = 0;
+            	//buf èµ‹å€¼;
+                input += index;
                 return 1;
             }
             break;
@@ -133,8 +131,7 @@ int scan(char* input){
             { // state 4;
                 //cout << "<INT10," << buf << ">\n";
                 buf = "";
-                index--;
-                state = 0;
+                input += index;
                 return 10;
 			}
             break;
@@ -177,8 +174,7 @@ int scan(char* input){
             else{// state 7
                 //cout << "<INT10," << buf << ">\n";
                 buf = "";
-                index--;
-                state = 0;
+                input += index;
                 return 10;
             }
             break;
@@ -382,28 +378,28 @@ int scan(char* input){
     return 0;
 }
 
-int main(){
-	printf("´Ê·¨·ÖÎöÆ÷Êä³öÀàĞÍËµÃ÷:\n");
+// int main(){
+// 	printf("è¯æ³•åˆ†æå™¨è¾“å‡ºç±»å‹è¯´æ˜:\n");
 
-	printf("1£º±êÊ¶·û\n");
+// 	printf("1ï¼šæ ‡è¯†ç¬¦\n");
 
-	printf("2£ºÔËËã·û\n");
+// 	printf("2ï¼šè¿ç®—ç¬¦\n");
 	
-	printf("3£º¹Ø¼ü×Ö\n");
+// 	printf("3ï¼šå…³é”®å­—\n");
 
-	printf("8£º°Ë½øÖÆÊı\n");
+// 	printf("8ï¼šå…«è¿›åˆ¶æ•°\n");
 
-	printf("10£ºÊ®½øÖÆÊı\n");
+// 	printf("10ï¼šåè¿›åˆ¶æ•°\n");
 
-	printf("16£ºÊ®Áù½øÖÆÊı\n");
+// 	printf("16ï¼šåå…­è¿›åˆ¶æ•°\n");
 	
-	printf("\n");
-    char *test = "BEGIN DEC10 0 123 00 070 0x0 0xD1023 END if () do ; else while1";
-    //char *test = "if () do ; else then ; while() while1 whilee whill wwhile";
-    while(test != NULL){
-		cout << scan("BEGIN DEC10") << endl;
+// 	printf("\n");
+//     char *test = "BEGIN 0 123";
+//     //char *test = "if () do ; else then ; while() while1 whilee whill wwhile";
+//     while(*test != 0){
+//         cout << scan(test) << endl;
 		
-	}
+// 	}
 	
 	
-}
+// }
