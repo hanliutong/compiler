@@ -130,7 +130,7 @@ int scan(char*& input){
             else
             { // state 4;
                 //cout << "<INT10," << buf << ">\n";
-                buf = "";
+                //buf = "";
                 input += index;
                 return 10;
 			}
@@ -141,17 +141,19 @@ int scan(char*& input){
             else
             {// state 7
                 cout << "<INT8," << buf << ">\n";
-                buf = "";
-                index--;
-                state = 0;
+                //buf = "";
+                //index--;
+                //state = 0;
+                return 8; 
             }
             break;
         case 8:
             if (cur == '0'){//state 9
                 buf += cur;
                 cout << "<INT16," << buf << ">\n";
-                buf = "";
-                state = 0;
+                //buf = "";
+                //state = 0;
+                return 16;
             }
             else if(is1toF(cur))
                 state = 10;
@@ -163,17 +165,18 @@ int scan(char*& input){
                 state =10;
             else{//state 11
                 cout << "<INT16," << buf << ">\n";
-                buf = "";
-                index--;
-                state = 0;
+                //buf = "";
+                //index--;
+                //state = 0;
+                return 16;
             }
             break;
         case 12:
             if (cur == '0' || isNumber(cur))
                 state = 12;
             else{// state 7
-                //cout << "<INT10," << buf << ">\n";
-                buf = "";
+                cout << "<INT10," << buf << ">\n";
+                //buf = "";
                 input += index;
                 return 10;
             }
@@ -189,9 +192,10 @@ int scan(char*& input){
                 state = 1;
             else{//state 17
                 cout << "<IF,_>\n";
-                buf = "";
-                index--;
-                state = 0;
+                //buf = "";
+                //index--;
+                //state = 0;
+            
             }
             break;
         case 18:
@@ -205,9 +209,9 @@ int scan(char*& input){
                 state = 1;
             else{//state 20
                 cout << "<DO,_>\n";
-                buf = "";
-                index--;
-                state = 0;
+                //buf = "";
+                //index--;
+                //state = 0;
             }
             break; 
         case 21:
@@ -295,9 +299,9 @@ int scan(char*& input){
                 state = 1;
             else{//state 36
                 cout << "<WHILE,_>\n";
-                buf = "";
-                index--;
-                state = 0;
+                //buf = "";
+                //index--;
+                //state = 0;
             }
             break;
         case 37:
