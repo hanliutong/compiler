@@ -86,6 +86,10 @@ int scan(char*& input){
             	state = 45;
             else if (cur == ';')
             	state = 46;
+            else if (cur == '{')
+            	state = 47;
+            else if (cur == '}')
+            	state = 48;
             else
                 state = 99;
             break;
@@ -375,6 +379,18 @@ int scan(char*& input){
             buf = "";
             input += index;
             return SEMI;
+            break;
+        case 47:
+        	cout << "<{,_>\n";
+            buf = "";
+            input += index;
+            return LCUR;
+            break;
+        case 48:
+        	cout << "<},_>\n";
+            buf = "";
+            input += index;
+            return RCUR;
             break;
         case 99:
         default:
