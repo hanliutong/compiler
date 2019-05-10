@@ -3,7 +3,10 @@
 #include "define.h"
 #include "lex.h"
 using namespace std;
-char *test = "while a = b do c = f";
+extern string IDN_NAME;
+extern int NUM;
+char *test = "while a = b do c = e if e = f then g = h if i = j then k = l else m = n while o = p do q = r ";// true
+// char *test = "if i = j then k = l  m < n while o = p do q = r "; //false because 'm < n' should be 'm = n'
 int getNext(){
     return scan(test);
 }
@@ -24,7 +27,6 @@ bool E();
 
 
 bool P(){
-    
     if (L()){
         switch (Token)
         {
@@ -49,21 +51,43 @@ bool S(){
     {
     case IF :
         if (!eat(IF))
-            return 0;
-        C();
-        eat(THEN);
-        S();
-        break;
+            return false;
+        if(!C()){
+            return false;
+        }
+        if(!eat(THEN))
+			return false;
+        if (!S()){
+            return false;
+        } 
+        switch (Token)
+        {//ELSE | null
+        case ELSE:
+            if (!eat(ELSE))
+                return false;
+            return S();
+            break;
+        default:
+            return true;
+            break;
+        }
+        break;//case IF:
     case WHILE:
-        eat(WHILE);
-        C();
-        eat(DO);
-        S();
+        if(!eat(WHILE))
+			return false;
+        if(!C()){
+            return false;
+        }
+        if(!eat(DO))
+			return false;
+        return S();
         break;
     case IDN:
-        eat(IDN);
-        eat(EQU);
-        E();
+        if(!eat(IDN))
+			return false;
+        if(!eat(EQU))
+			return false;
+        return E();
         break;
     default:
         return false;
@@ -73,23 +97,28 @@ bool S(){
 }
 
 bool C(){
-    E();
+    if(!E())
+        return false;
     switch (Token)
     {
     case LESS:
-        eat(LESS);
+        if(!eat(LESS))
+			return false;
         break;
     case MORE:
-        eat(MORE);
+        if(!eat(MORE))
+			return false;
         break;
     case EQU:
-        eat(EQU);
+        if(!eat(EQU))
+			return false;
         break;
     default:
         return false;
         break;
     }
-    E();
+    if(!E())
+        return false;
     return true;
 }
 
@@ -97,12 +126,7 @@ bool E(){
     return eat(IDN);
 }
 
-int main(){
-    
-    //char *test = "";
-    // while(*test){
-    //     cout << scan(test) << endl;
-    // }
+bool run(){
     Token = getNext();
-    cout << P() << endl;
+    return P();
 }

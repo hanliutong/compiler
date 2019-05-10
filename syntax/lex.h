@@ -1,9 +1,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include "define.h"
-//#include <string.h>
 using namespace std;
-int AAA1 = 100;
+int NUM = 0;//INT8 INT10 INT16属性的全局变量
+string IDN_NAME;//标识符属性的全局变量
 
 bool isLetter(char input){
     if (input >= 'A' && input <= 'Z')
@@ -39,21 +39,6 @@ bool is1toF(char input){
         return false;
 }
 
-bool isOperator(char input){
-    if (input == '+' |
-        input == '-' |
-        input == '*' |
-        input == '/' |
-        input == '>' |
-        input == '<' |
-        input == '=' |
-        input == '(' |
-        input == ')' |
-        input == ';')
-        return true;
-    else
-        return false;
-}
 int scan(char*& input){
     int state = 0;
     int index = 0;
@@ -108,9 +93,10 @@ int scan(char*& input){
             if (isLetter(cur) || (isNumber(cur)))
                 state = 1;
             else{//state 2
-            	//buf 赋值;
+                IDN_NAME = buf;
                 cout << "<IDN," << buf << ">\n";
                 input += index;
+                state = 0;
                 return 1;
             }
             break;
@@ -123,6 +109,7 @@ int scan(char*& input){
                 buf += cur;
                 cout << "<INT8," << buf << ">\n";
                 buf = "";
+                index++;
                 input += index;
                 return 8;
             }
@@ -153,6 +140,7 @@ int scan(char*& input){
             if (cur == '0'){//state 9
                 buf += cur;
                 cout << "<INT16," << buf << ">\n";
+                index++;
                 input += index;
                 return 16;
             }
@@ -184,8 +172,10 @@ int scan(char*& input){
         case 15:
             if (cur == 'f')
                 state = 16;
-            else
+            else{
                 state = 1;
+                continue;
+            }
             break;
         case 16:
             if (isLetter(cur) || isNumber(cur))
@@ -202,12 +192,13 @@ int scan(char*& input){
                 state = 19;
             else{
                 state = 1;
-                index--;
+                continue;
             }
             break;   
         case 19:
-            if (isLetter(cur) || isNumber(cur))
+            if (isLetter(cur) || isNumber(cur)){
                 state = 1;
+            }
             else{//state 20
                 cout << "<DO,_>\n";
                 buf = "";
@@ -218,20 +209,26 @@ int scan(char*& input){
         case 21:
             if (cur == 'l')
                 state = 22;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;    
         case 22:
             if (cur == 's')
                 state = 23;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;   
         case 23:
             if (cur == 'e')
                 state = 24;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;  
         case 24:
             if (isLetter(cur) || isNumber(cur))
@@ -246,20 +243,26 @@ int scan(char*& input){
         case 26:
             if (cur == 'h')
                 state = 27;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;    
         case 27:
             if (cur == 'e')
                 state = 28;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;   
         case 28:
             if (cur == 'n')
                 state = 29;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;  
         case 29:
             if (isLetter(cur) || isNumber(cur))
@@ -274,26 +277,34 @@ int scan(char*& input){
         case 31:
             if (cur == 'h')
                 state = 32;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;    
         case 32:
             if (cur == 'i')
                 state = 33;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;   
         case 33:
             if (cur == 'l')
                 state = 34;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;
         case 34:
             if (cur == 'e')
                 state = 35;
-            else
+            else{
                 state = 1;
+				continue;
+			}
             break;    
         case 35:
             if (isLetter(cur) || isNumber(cur))
@@ -372,38 +383,14 @@ int scan(char*& input){
             break;
         }
 
-    if (state != 0)
+    if (state != 0 && cur != ' ')
         buf += cur;
     if (cur)
         cur = input[++index];
-    else
-        break;//while
+    if (!cur && state == 0){
+        input += index;
+        break;
+        }//while
     }
     return 0;
 }
-
-// int main(){
-// 	printf("词法分析器输出类型说明:\n");
-
-// 	printf("1：标识符\n");
-
-// 	printf("2：运算符\n");
-	
-// 	printf("3：关键字\n");
-
-// 	printf("8：八进制数\n");
-
-// 	printf("10：十进制数\n");
-
-// 	printf("16：十六进制数\n");
-	
-// 	printf("\n");
-//     char *test = "BEGIN 0 123";
-//     //char *test = "if () do ; else then ; while() while1 whilee whill wwhile";
-//     while(*test != 0){
-//         cout << scan(test) << endl;
-		
-// 	}
-	
-	
-// }
