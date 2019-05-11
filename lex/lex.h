@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <cmath>
 #include "define.h"
 using namespace std;
 int NUM = 0;//INT8 INT10 INT16属性的全局变量
@@ -37,6 +38,14 @@ bool is1toF(char input){
         return true;
     else
         return false;
+}
+
+int OCT2DEC(string oct){
+	int dec = 0;
+	for(int i = 0; i < oct.length(); i++){
+		dec += ((int)oct.at(oct.length() - i - 1) - 48) * pow(8, i);
+	}
+	return dec;
 }
 
 int scan(char*& input){
@@ -112,6 +121,7 @@ int scan(char*& input){
             if (cur == '0'){//state 5
                 buf += cur;
                 cout << "<INT8," << buf << ">\n";
+                NUM = OCT2DEC(buf);
                 buf = "";
                 index++;
                 input += index;
@@ -135,6 +145,7 @@ int scan(char*& input){
             else
             {// state 7
                 cout << "<INT8," << buf << ">\n";
+                NUM = OCT2DEC(buf);
                 buf = "";
                 input += index;
                 return 8;
