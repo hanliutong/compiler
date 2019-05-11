@@ -17,6 +17,5 @@
 #define RPAR 24 // )
 #define EQU 25  // =
 #define SEMI 26 // ;
-#define SEMI 26 // ;
-#define LCUR 26 // {
-#define RCUR 26 // }
+#define LCUR 27 // {
+#define RCUR 28 // }
