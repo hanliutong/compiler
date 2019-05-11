@@ -97,6 +97,7 @@ bool E(){
     return eat(IDN);
 }
 
+
 int main(){
     
     //char *test = "";
@@ -104,5 +105,5 @@ int main(){
     //     cout << scan(test) << endl;
     // }
     Token = getNext();
-    cout << P() << endl;
+  	cout << P() << endl;
 }
