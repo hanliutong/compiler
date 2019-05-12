@@ -406,19 +406,19 @@ int scan(char*& input){
             buf = "";
             input += index;
             return RPAR;
-			break;
+            break;
         case 45:
             cout << "<=,_>\n";
             buf = "";
             input += index;
             return EQU;
-			break;
+            break;
         case 46:
             cout << "<;,_>\n";
             buf = "";
             input += index;
             return SEMI;
-			break;
+            break;
         case 47:
         	cout << "<{,_>\n";
             buf = "";
