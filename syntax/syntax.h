@@ -5,7 +5,7 @@
 using namespace std;
 extern string IDN_NAME;
 extern int NUM;
-char *test = "while a = b do {c = e if e = f then g = h  if i = j then k = l else m = n while o = p do q = r } ";// true
+char *test = "while a = b do {c = e if e = f then g = h  if i = j then k = l else m = n while o = p do q = r} ";// true
 // char *test = "if i = j then k = l  m < n while o = p do q = r "; //false because 'm < n' should be 'm = n'
 int getNext(){
     return scan(test);
