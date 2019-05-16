@@ -25,6 +25,10 @@ bool P();
 bool S();
 bool C();
 bool E();
+bool N();
+bool T();
+bool G();
+bool F();
 
 
 bool P(){
@@ -140,8 +144,124 @@ bool C(){
 }
 
 bool E(){
+//    return eat(IDN);
+//	if(!T()){
+//		return N();
+//	}
+//	else 
+//		return false;
+	T();
+	N();
 
-    return eat(IDN);
+}
+
+bool N()
+{
+	switch (Token)
+	{
+		case ADD:
+			if(!eat(ADD))
+				return 0;
+//			eat(ADD);
+			T();
+			N();
+			break; 
+		case SUB:
+			if(!eat(SUB))
+				return 0;
+			T();
+			N();
+			break;
+//			N();
+		default :
+			return false;//express NULL
+	}
+	
+//	N();
+	
+}
+
+bool T(){
+//	if(F()){
+//		return G();
+//	}
+//	else 
+//		return false;
+	F();
+	G();
+
+
+} 
+
+bool G(){
+	switch (Token)
+	{
+		case MUL:
+			if(!eat(MUL))
+				return 0;
+//			eat(MUL);
+			if(Token==SEMI){
+				return false;
+				break;
+			}
+			F();
+			G();
+			break;
+		case DIV:
+			if(!eat(DIV))
+				return 0;
+//			eat(DIV);
+			if(Token==SEMI){
+				return false;
+				break;
+			}
+			F();
+			G();
+			break;
+		case ADD:
+			eat(ADD);
+			T();
+			N();
+			break;
+		case SUB:
+			eat(SUB);
+			T();
+			N();
+			break;
+		case SEMI:
+			eat(SEMI);
+		default :
+			return false;//express NULL
+	} 
+	return true;
+}
+
+bool F(){
+	switch (Token)
+	{
+		case LPAR:
+			if(!eat(LPAR))
+				return 0;
+			E();
+			if(!eat(RPAR))
+				return 0;
+			break;
+		case IDN:
+			return eat(IDN);
+			break;
+		case INT8:
+			return eat(INT8);
+			break;
+		case INT10:
+			return eat(INT10);
+			break;
+		case INT16:
+			return eat(INT16);
+			break;	
+		default:
+			return false;	
+			break;
+	}
 }
 
 bool run(){

@@ -3,5 +3,5 @@
 *.bin
 *.vscode
 ~$*
-*.gch
-tempCodeRunnerFile.h
+*.h.gch
+
