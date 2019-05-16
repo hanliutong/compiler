@@ -123,6 +123,8 @@ int scan(char*& input){
             	state = 47;
             else if (cur == '}')
             	state = 48;
+            else if (cur == 0)
+                break;
             else
                 state = 99;
             break;
