@@ -5,7 +5,7 @@
 using namespace std;
 extern string IDN_NAME;
 extern int NUM;
-char *test = "while a = b do c = e if e = f then g = h if i = j then k = l else m = n while o = p do q = r ";// true
+char *test = "while a = b do {c = e if e = f then g = h  if i = j then k = l else m = n while o = p do q = r} ";// true
 // char *test = "if i = j then k = l  m < n while o = p do q = r "; //false because 'm < n' should be 'm = n'
 int getNext(){
     return scan(test);
@@ -17,6 +17,7 @@ bool eat(int token){
         return true;
     }
     else
+        cout <<" curT : "<< token <<" expect : "<< Token << endl;
         return false;
 }
 bool L();
@@ -27,10 +28,14 @@ bool E();
 
 
 bool P(){
+
     if (L()){
         switch (Token)
         {
         case 0:
+            return true;
+            break;
+        case RCUR:
             return true;
             break;
         default:
@@ -43,10 +48,12 @@ bool P(){
 }
 
 bool L(){
+
     return S();
 }
 
 bool S(){
+
     switch (Token)
     {
     case IF :
@@ -89,6 +96,15 @@ bool S(){
 			return false;
         return E();
         break;
+    case LCUR:
+        if(!eat(LCUR))
+            return false;
+        if(!P())
+            return false;
+        if(!eat(RCUR))
+            return false;
+        return true;
+        break;
     default:
         return false;
         break;
@@ -97,6 +113,7 @@ bool S(){
 }
 
 bool C(){
+
     if(!E())
         return false;
     switch (Token)
@@ -123,10 +140,16 @@ bool C(){
 }
 
 bool E(){
+
     return eat(IDN);
 }
 
 bool run(){
     Token = getNext();
-    return P();
+    if (P())
+        return true;
+    else{
+        cout <<"\ttoken : "<< Token << endl;
+        return false;
+    }
 }

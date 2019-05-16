@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <cmath>
 #include "define.h"
 using namespace std;
 int NUM = 0;//INT8 INT10 INT16属性的全局变量
@@ -38,6 +39,38 @@ bool is1toF(char input){
     else
         return false;
 }
+
+int OCT2NUM(string oct){
+	int num = 0;
+	for(int i = 0; i < oct.length(); i++) {
+		num += ((int)oct.at(oct.length() - i - 1) - 48) * pow(8, i);
+	}
+	return num;
+}
+
+int DEC2NUM(string dec){
+	int num = 0;
+	for(int i = 0; i < dec.length(); i++) {
+		num += ((int)dec.at(dec.length() - i - 1) - 48) * pow(10, i);
+	}
+	return num;
+}
+
+int HEX2NUM(string hex){
+	int num = 0;
+	for(int i = 2; i < hex.length(); i++) {
+		if(isNumber(hex.at(i))) {
+			num += ((int)hex.at(i) - 48) * pow(16, (hex.length() - 1 - i));
+		}
+		else if(hex.at(i) <= 'F') {
+			num += ((int)hex.at(i) - 55) * pow(16, (hex.length() - 1 - i));
+		}
+		else {
+			num += ((int)hex.at(i) - 87) * pow(16, (hex.length() - 1 - i));
+		}
+	}
+	return num;
+} 
 
 int scan(char*& input){
     int state = 0;
@@ -86,7 +119,13 @@ int scan(char*& input){
             	state = 45;
             else if (cur == ';')
             	state = 46;
-            else
+            else if (cur == '{')
+            	state = 47;
+            else if (cur == '}')
+            	state = 48;
+            else if (!cur)
+                break;
+            else 
                 state = 99;
             break;
         case 1:
@@ -108,6 +147,7 @@ int scan(char*& input){
             if (cur == '0'){//state 5
                 buf += cur;
                 cout << "<INT8," << buf << ">\n";
+                NUM = OCT2NUM(buf);
                 buf = "";
                 index++;
                 input += index;
@@ -120,6 +160,7 @@ int scan(char*& input){
             else
             { // state 4;
                 cout << "<INT10," << buf << ">\n";
+                NUM = DEC2NUM(buf);
                 buf = "";
                 input += index;
                 return 10;
@@ -131,6 +172,7 @@ int scan(char*& input){
             else
             {// state 7
                 cout << "<INT8," << buf << ">\n";
+                NUM = OCT2NUM(buf);
                 buf = "";
                 input += index;
                 return 8;
@@ -140,6 +182,7 @@ int scan(char*& input){
             if (cur == '0'){//state 9
                 buf += cur;
                 cout << "<INT16," << buf << ">\n";
+                NUM = HEX2NUM(buf);
                 index++;
                 input += index;
                 return 16;
@@ -154,6 +197,7 @@ int scan(char*& input){
                 state =10;
             else{//state 11
                 cout << "<INT16," << buf << ">\n";
+                NUM = HEX2NUM(buf);
                 buf = "";
                 input += index;
                 return 16;
@@ -164,6 +208,7 @@ int scan(char*& input){
                 state = 12;
             else{// state 13
                 cout << "<INT10," << buf << ">\n";
+                NUM = DEC2NUM(buf);
                 buf = "";
                 input += index;
                 return 10;
@@ -375,6 +420,18 @@ int scan(char*& input){
             buf = "";
             input += index;
             return SEMI;
+            break;
+        case 47:
+        	cout << "<{,_>\n";
+            buf = "";
+            input += index;
+            return LCUR;
+            break;
+        case 48:
+        	cout << "<},_>\n";
+            buf = "";
+            input += index;
+            return RCUR;
             break;
         case 99:
         default:
