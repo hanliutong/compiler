@@ -222,7 +222,8 @@ bool F(){
 		case LPAR:
 			if(!eat(LPAR))
 				return 0;
-			E();
+			if(!E())
+				return 0;
 			if(!eat(RPAR))
 				return 0;
 			break;
