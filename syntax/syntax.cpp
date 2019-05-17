@@ -69,18 +69,22 @@ bool N()
 			if(!eat(ADD))
 				return 0;
 //			eat(ADD);
-			T();
-			N();
+			if(!T())
+				return 0;
+			if(!N())
+				return 0;
 			break; 
 		case SUB:
 			if(!eat(SUB))
 				return 0;
-			T();
-			N();
+			if(!T())
+				return 0;
+			if(!N())
+				return 0;
 			break;
 //			N();
 		default :
-			return false;//express NULL
+			return true;//express NULL
 	}
 	
 //	N();
@@ -99,16 +103,21 @@ bool S(){
         S();
         break;
     case WHILE:
-        eat(WHILE);
+        if(!eat(WHILE))
+        	return 0;
         C();
-        eat(DO);
+        if(!eat(DO))
+        	return 0;
         S();
         break;
     case IDN:
         eat(IDN);
-        eat(EQU);
+        if(!eat(EQU))
+        	return 0;
         E();
         break;
+    case 0:
+    	return true;
     default:
         return false;
         break;
@@ -144,8 +153,11 @@ bool E(){
 //	}
 //	else 
 //		return false;
-	T();
-	N();
+	if(!T())
+		return 0;
+	if(!N())
+		return 0;
+	return true;
 
 }
 
@@ -155,8 +167,11 @@ bool T(){
 //	}
 //	else 
 //		return false;
-	F();
-	G();
+	if(!F())
+		return 0;
+	if(!G())
+		return 0;
+	return true;
 
 
 } 
@@ -172,8 +187,10 @@ bool G(){
 				return false;
 				break;
 			}
-			F();
-			G();
+			if(!F())
+				return 0;
+			if(!G())
+				return 0;
 			break;
 		case DIV:
 			if(!eat(DIV))
@@ -183,23 +200,17 @@ bool G(){
 				return false;
 				break;
 			}
-			F();
-			G();
-			break;
-		case ADD:
-			eat(ADD);
-			T();
-			N();
-			break;
-		case SUB:
-			eat(SUB);
-			T();
-			N();
+			if(!F())
+				return 0;
+			if(!G())
+				return false;
 			break;
 		case SEMI:
 			eat(SEMI);
+//		case 0:
+//			return true;
 		default :
-			return false;//express NULL
+			return true;//express NULL
 	} 
 	return true;
 }
@@ -214,6 +225,10 @@ bool F(){
 			if(!eat(RPAR))
 				return 0;
 			break;
+//		case RPAR:
+//			if(!eat(RPAR))
+//				return 0;
+//			break;
 		case IDN:
 			return eat(IDN);
 			break;
