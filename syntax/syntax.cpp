@@ -88,6 +88,7 @@ bool N()
 	}
 	
 //	N();
+	return true;
 	
 }
 
@@ -245,6 +246,7 @@ bool F(){
 			return false;	
 			break;
 	}
+	return true; 
 }
 
 int main(){
