@@ -64,7 +64,7 @@ public:
     int getClass(){
         return AttrE_;
     }
-    int temp;
+    int temp = 0;
     string place;
     //todo
 };

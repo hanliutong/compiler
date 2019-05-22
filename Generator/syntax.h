@@ -7,7 +7,7 @@ using namespace std;
 extern string IDN_NAME;
 extern int NUM;
 //char *test = "while a>b do while y<z do y = x; c=b; "; // true
-char *test = "while a>b do if x2 = x3 then while y<z do y = x+c; c=b; "; // true
+char *test = "while a>b do if x2 + c = x3 then while y<z do y = x; c=b+r-x+y; "; // true
 
 /*
 while a < b 
@@ -25,12 +25,12 @@ int getNext(){
 }
 int Token;
 int Lable = 0;
-int newLable(){
-    return (++Lable);
-}
 int Temp = 0;
 int newTemp(){
-	return (++Temp);
+    return (++Temp);
+}
+int newLable(){
+    return (++Lable);
 }
 bool eat(int token){
     if (Token == token){
@@ -46,10 +46,10 @@ bool P(AttrP &thisP);
 bool S(AttrS &thisS);
 bool C(AttrC &thisC);
 bool E(AttrE &thisE);
-bool T(AttrT &thisT);
-bool N(AttrN &thisN);
-bool G(AttrG &thisG);
 bool F(AttrF &thisF);
+bool G(AttrG &thisG);
+bool N(AttrN &thisN);
+bool T(AttrT &thisT);
 
 bool P(AttrP &thisP){
     AttrL attrL(&thisP);
@@ -172,7 +172,7 @@ bool S(AttrS &thisS){
             thisS.gen("L" + to_string(thisS.next) + ": ");
         }
         thisS.code += attrE.code;
-        thisS.gen(IDplace + ":=" + attrE.place);
+        thisS.gen(IDplace + " := " + attrE.place);
         return true;
         break;
     case LCUR:
@@ -221,24 +221,29 @@ bool C(AttrC &thisC){
     }
     if(!E(E2))
         return false;
-    
+    thisC.code = E1.code + E2.code;
     thisC.gen("if " + E1.place + op + E2.place + " goto(C.T) L" + to_string(thisC.T));
     thisC.gen("goto(C.F) L" + to_string(thisC.F));
     return true;
 }
 
+// bool E(AttrE &thisE){
+//     thisE.place = IDN_NAME;
+//     return eat(IDN);
+// }
+
 bool E(AttrE &thisE){
-	AttrE attrE(&thisE);
 	AttrT T1(&thisE);
-	AttrN N1(&thisE);
-	thisE.place=newTemp();
+    AttrN N1(&thisE);
+	// thisE.temp=newTemp();
 	if(!T(T1))
 		return 0;
+    thisE.place = T1.place;
 	if(!N(N1))
 		return 0;
-    
+    if(!N1.place.empty())
+        thisE.place = N1.place;//t(x)
     thisE.code=T1.code+N1.code;
-    thisE.code += thisE.place +":=" +T1.place +N1.place;
 	return true;
 
 }
@@ -246,10 +251,9 @@ bool E(AttrE &thisE){
 
 
 bool T(AttrT &thisT){
-	AttrT attrT(&thisT);
 	AttrF F1(&thisT);
 	AttrG G1(&thisT);
-	attrT.place=newTemp();
+	// attrT.place=newTemp();
 	if(!F(F1))
 		return 0;
 	if(!G(G1))
@@ -257,7 +261,6 @@ bool T(AttrT &thisT){
     thisT.place=F1.place+G1.place;
 	thisT.code=F1.code+G1.code;
 	return true;
-
 }
 
 bool N(AttrN &thisN){
@@ -269,6 +272,7 @@ bool N(AttrN &thisN){
 	switch (Token)
 	{
 		case ADD:
+            thisN.place="t"+to_string(newTemp());
 			if(!eat(ADD))
 				return 0;
 			op='+';
@@ -278,6 +282,7 @@ bool N(AttrN &thisN){
 				return 0;
 			break; 
 		case SUB:
+            thisN.place="t"+to_string(newTemp());
 			if(!eat(SUB))
 				return 0;
 			op='-';
@@ -289,9 +294,12 @@ bool N(AttrN &thisN){
 		default :
 			return true;//express NULL
 	}
-	N1.code=T1.code+N1.code;
+	// N1.code=T1.code+N1.code;
 	// thisN.gen("t"+to_string(E1.temp)+" := "+T1.place+op+N1.place);
-    thisN.gen(op + N1.place+T1.place);
+    thisN.gen(thisN.place+": "+ ((AttrE*)thisN.father)->place+op+T1.place);
+    thisN.code += N1.code;
+    if(!N1.place.empty())
+        thisN.place = N1.place;
     return true;
 }
 //
@@ -300,10 +308,11 @@ bool G(AttrG &thisG){
 	AttrG G1(&thisG);
 	AttrT T1(&thisG);
 	string op;
-	T1.temp=newTemp();
+	// T1.temp=newTemp();
 	switch (Token)
 	{
 		case MUL:
+            thisG.temp=newTemp();
 			if(!eat(MUL))
 				return 0;
 //			eat(MUL);
@@ -318,6 +327,7 @@ bool G(AttrG &thisG){
 				return 0;
 			break;
 		case DIV:
+            thisG.temp=newTemp();
 			if(!eat(DIV))
 				return 0;
 
