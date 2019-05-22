@@ -64,6 +64,59 @@ public:
     int getClass(){
         return AttrE_;
     }
+    int temp;
+    string place;
+    //todo
+};
+
+class AttrT: public Attr{
+public:
+    AttrT(Attr* point){
+        father = point;
+    }
+    int getClass(){
+        return AttrT_;
+    }
+    int temp;
+    string place;
+    //todo
+};
+
+class AttrN: public Attr{
+public:
+    AttrN(Attr* point){
+        father = point;
+    }
+    int getClass(){
+        return AttrN_;
+    }
+    int temp;
+    string place;
+    //todo
+};
+
+class AttrG: public Attr{
+public:
+    AttrG(Attr* point){
+        father = point;
+    }
+    int getClass(){
+        return AttrG_;
+    }
+    int temp;
+    string place;
+    //todo
+};
+
+class AttrF: public Attr{
+public:
+    AttrF(Attr* point){
+        father = point;
+    }
+    int getClass(){
+        return AttrF_;
+    }
+    int temp;
     string place;
     //todo
 };
