@@ -24,3 +24,7 @@
 #define AttrS_ 3 // 
 #define AttrC_ 4 // 
 #define AttrE_ 5 // 
+#define AttrT_ 6 //
+#define AttrN_ 7 //
+#define AttrG_ 8 //
+#define AttrF_ 9
