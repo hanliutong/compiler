@@ -3,4 +3,5 @@
 *.bin
 *.vscode
 ~$*
-*.gch
+*.h.gch
+
