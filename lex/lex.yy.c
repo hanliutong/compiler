@@ -642,107 +642,107 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 59 "lex3.lex"
-{ count++;printf("%d\t(8,¡®%s¡¯)\n",count,yytext); }
+{ count++;printf("%d\t(8,â€˜%sâ€™)\n",count,yytext); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 61 "lex3.lex"
-{count++;printf("%d\t(10,¡®%s¡¯)\n",count,yytext);}
+{count++;printf("%d\t(10,â€˜%sâ€™)\n",count,yytext);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 63 "lex3.lex"
-{count++;printf("%d\t(16,¡®%s¡¯)\n",count,yytext);}
+{count++;printf("%d\t(16,â€˜%sâ€™)\n",count,yytext);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 65 "lex3.lex"
-{count++;printf("%d\t(11,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(11,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 67 "lex3.lex"
-{count++;printf("%d\t12,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t12,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 69 "lex3.lex"
-{count++;printf("%d\t(13,¡®%s¡¯)\n",count,yytext);}  
+{count++;printf("%d\t(13,â€˜%sâ€™)\n",count,yytext);}  
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 71 "lex3.lex"
-{count++;printf("%d\t(14,¡®%s¡¯)\n",count,yytext);}
+{count++;printf("%d\t(14,â€˜%sâ€™)\n",count,yytext);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 73 "lex3.lex"
-{count++;printf("%d\t(15,¡®%s¡¯)\n",count,yytext);}  
+{count++;printf("%d\t(15,â€˜%sâ€™)\n",count,yytext);}  
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 75 "lex3.lex"
-{count++;printf("%d\t(17,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(17,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 77 "lex3.lex"
-{count++;printf("%d\t(18,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(18,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 79 "lex3.lex"
-{count++;printf("%d\t(19,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(19,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 81 "lex3.lex"
-{count++;printf("%d\t(20,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(20,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 83 "lex3.lex"
-{count++;printf("%d\t(21,¡®%s¡¯)\n",count,yytext);}
+{count++;printf("%d\t(21,â€˜%sâ€™)\n",count,yytext);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 85 "lex3.lex"
-{count++;printf("%d\t(22,¡®%s¡¯)\n",count,yytext);}  
+{count++;printf("%d\t(22,â€˜%sâ€™)\n",count,yytext);}  
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 87 "lex3.lex"
-{count++;printf("%d\t(23,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(23,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 89 "lex3.lex"
-{count++;printf("%d\t(24,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(24,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 91 "lex3.lex"
-{count++;printf("%d\t(25,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(25,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 93 "lex3.lex"
-{count++;printf("%d\t(26,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(26,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 95 "lex3.lex"
-{count++;printf("%d\t(27,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(27,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 97 "lex3.lex"
-{count++;printf("%d\t(28,¡®%s¡¯)\n",count,yytext);} 
+{count++;printf("%d\t(28,â€˜%sâ€™)\n",count,yytext);} 
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 99 "lex3.lex"
-{count++;printf("%d\t(1,¡®%s¡¯)\n",count,yytext);}
+{count++;printf("%d\t(1,â€˜%sâ€™)\n",count,yytext);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
@@ -1647,47 +1647,47 @@ void main()
 
 {
 
-    printf("´Ê·¨·ÖÎöÆ÷Êä³öÀàĞÍËµÃ÷:\n");
+    printf("è¯æ³•åˆ†æå™¨è¾“å‡ºç±»å‹è¯´æ˜:\n");
 
-	printf("1£ºIDN\n");
+	printf("1ï¼šIDN\n");
 
-	printf("8£ºINT8\n");
+	printf("8ï¼šINT8\n");
 
-	printf("10£ºINT10\n");
+	printf("10ï¼šINT10\n");
 
-	printf("11£ºIF\n");
+	printf("11ï¼šIF\n");
 
-	printf("12£ºTHEN\n");
+	printf("12ï¼šTHEN\n");
 
-	printf("13£ºELSE\n");
+	printf("13ï¼šELSE\n");
 
-	printf("14£ºWHILE\n");
+	printf("14ï¼šWHILE\n");
 
-	printf("15£ºDO\n");
+	printf("15ï¼šDO\n");
 
-	printf("16£ºINT16\n");
+	printf("16ï¼šINT16\n");
 
-	printf("17£ºADD\n");
+	printf("17ï¼šADD\n");
 
-	printf("18£ºSUB\n");
+	printf("18ï¼šSUB\n");
 
-	printf("19£ºMUL\n");
+	printf("19ï¼šMUL\n");
 
-	printf("20£ºDIV\n");
+	printf("20ï¼šDIV\n");
 
-	printf("21£ºLESS\n");
+	printf("21ï¼šLESS\n");
 
-	printf("22£ºMORE\n");
+	printf("22ï¼šMORE\n");
 
-	printf("23£ºLPAR\n");
+	printf("23ï¼šLPAR\n");
 
-	printf("24£ºRPAR\n");
+	printf("24ï¼šRPAR\n");
 
-	printf("25£ºEQU\n");
+	printf("25ï¼šEQU\n");
 
-	printf("26£ºSEMI\n");
-	printf("27£ºLCUR\n");
-	printf("28£ºRCUR\n");
+	printf("26ï¼šSEMI\n");
+	printf("27ï¼šLCUR\n");
+	printf("28ï¼šRCUR\n");
 	printf("\n");
 
 	yyin=fopen("example.txt","r"); 
@@ -1696,7 +1696,7 @@ void main()
 
 	fclose(yyin);
 
-	system("PAUSE");/*ÔİÍ£Í£,  Ê¹DOS´°¿ÚÍ£×¡*/
+	system("PAUSE");/*æš‚åœåœ,  ä½¿DOSçª—å£åœä½*/
 
 } 
 

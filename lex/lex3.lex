@@ -56,47 +56,47 @@ whitespace {delim}+
 
 %% 
 
-{INT8} { count++;printf("%d\t(8,¡®%s¡¯)\n",count,yytext); }
+{INT8} { count++;printf("%d\t(8,â€˜%sâ€™)\n",count,yytext); }
 
-{INT10} {count++;printf("%d\t(10,¡®%s¡¯)\n",count,yytext);}
+{INT10} {count++;printf("%d\t(10,â€˜%sâ€™)\n",count,yytext);}
 
-{INT16} {count++;printf("%d\t(16,¡®%s¡¯)\n",count,yytext);}
+{INT16} {count++;printf("%d\t(16,â€˜%sâ€™)\n",count,yytext);}
 
-{IF} {count++;printf("%d\t(11,¡®%s¡¯)\n",count,yytext);} 
+{IF} {count++;printf("%d\t(11,â€˜%sâ€™)\n",count,yytext);} 
 
-{THEN} {count++;printf("%d\t12,¡®%s¡¯)\n",count,yytext);} 
+{THEN} {count++;printf("%d\t12,â€˜%sâ€™)\n",count,yytext);} 
 
-{ELSE} {count++;printf("%d\t(13,¡®%s¡¯)\n",count,yytext);}  
+{ELSE} {count++;printf("%d\t(13,â€˜%sâ€™)\n",count,yytext);}  
 
-{WHILE} {count++;printf("%d\t(14,¡®%s¡¯)\n",count,yytext);}
+{WHILE} {count++;printf("%d\t(14,â€˜%sâ€™)\n",count,yytext);}
 
-{DO} {count++;printf("%d\t(15,¡®%s¡¯)\n",count,yytext);}  
+{DO} {count++;printf("%d\t(15,â€˜%sâ€™)\n",count,yytext);}  
 
-{ADD} {count++;printf("%d\t(17,¡®%s¡¯)\n",count,yytext);} 
+{ADD} {count++;printf("%d\t(17,â€˜%sâ€™)\n",count,yytext);} 
 
-{SUB} {count++;printf("%d\t(18,¡®%s¡¯)\n",count,yytext);} 
+{SUB} {count++;printf("%d\t(18,â€˜%sâ€™)\n",count,yytext);} 
 
-{MUL} {count++;printf("%d\t(19,¡®%s¡¯)\n",count,yytext);} 
+{MUL} {count++;printf("%d\t(19,â€˜%sâ€™)\n",count,yytext);} 
 
-{DIV} {count++;printf("%d\t(20,¡®%s¡¯)\n",count,yytext);} 
+{DIV} {count++;printf("%d\t(20,â€˜%sâ€™)\n",count,yytext);} 
 
-{LESS} {count++;printf("%d\t(21,¡®%s¡¯)\n",count,yytext);}
+{LESS} {count++;printf("%d\t(21,â€˜%sâ€™)\n",count,yytext);}
 
-{MORE} {count++;printf("%d\t(22,¡®%s¡¯)\n",count,yytext);}  
+{MORE} {count++;printf("%d\t(22,â€˜%sâ€™)\n",count,yytext);}  
 
-{LPAR} {count++;printf("%d\t(23,¡®%s¡¯)\n",count,yytext);} 
+{LPAR} {count++;printf("%d\t(23,â€˜%sâ€™)\n",count,yytext);} 
 
-{RPAR} {count++;printf("%d\t(24,¡®%s¡¯)\n",count,yytext);} 
+{RPAR} {count++;printf("%d\t(24,â€˜%sâ€™)\n",count,yytext);} 
 
-{EQU} {count++;printf("%d\t(25,¡®%s¡¯)\n",count,yytext);} 
+{EQU} {count++;printf("%d\t(25,â€˜%sâ€™)\n",count,yytext);} 
 
-{SEMI} {count++;printf("%d\t(26,¡®%s¡¯)\n",count,yytext);} 
+{SEMI} {count++;printf("%d\t(26,â€˜%sâ€™)\n",count,yytext);} 
 
-{LCUR} {count++;printf("%d\t(27,¡®%s¡¯)\n",count,yytext);} 
+{LCUR} {count++;printf("%d\t(27,â€˜%sâ€™)\n",count,yytext);} 
 
-{RCUR} {count++;printf("%d\t(28,¡®%s¡¯)\n",count,yytext);} 
+{RCUR} {count++;printf("%d\t(28,â€˜%sâ€™)\n",count,yytext);} 
 
-{IDN} {count++;printf("%d\t(1,¡®%s¡¯)\n",count,yytext);}
+{IDN} {count++;printf("%d\t(1,â€˜%sâ€™)\n",count,yytext);}
 
 {whitespace} { /* do    nothing*/ } 
 %% 
@@ -105,47 +105,47 @@ void main()
 
 {
 
-    printf("´Ê·¨·ÖÎöÆ÷Êä³öÀàĞÍËµÃ÷:\n");
+    printf("è¯æ³•åˆ†æå™¨è¾“å‡ºç±»å‹è¯´æ˜:\n");
 
-	printf("1£ºIDN\n");
+	printf("1ï¼šIDN\n");
 
-	printf("8£ºINT8\n");
+	printf("8ï¼šINT8\n");
 
-	printf("10£ºINT10\n");
+	printf("10ï¼šINT10\n");
 
-	printf("11£ºIF\n");
+	printf("11ï¼šIF\n");
 
-	printf("12£ºTHEN\n");
+	printf("12ï¼šTHEN\n");
 
-	printf("13£ºELSE\n");
+	printf("13ï¼šELSE\n");
 
-	printf("14£ºWHILE\n");
+	printf("14ï¼šWHILE\n");
 
-	printf("15£ºDO\n");
+	printf("15ï¼šDO\n");
 
-	printf("16£ºINT16\n");
+	printf("16ï¼šINT16\n");
 
-	printf("17£ºADD\n");
+	printf("17ï¼šADD\n");
 
-	printf("18£ºSUB\n");
+	printf("18ï¼šSUB\n");
 
-	printf("19£ºMUL\n");
+	printf("19ï¼šMUL\n");
 
-	printf("20£ºDIV\n");
+	printf("20ï¼šDIV\n");
 
-	printf("21£ºLESS\n");
+	printf("21ï¼šLESS\n");
 
-	printf("22£ºMORE\n");
+	printf("22ï¼šMORE\n");
 
-	printf("23£ºLPAR\n");
+	printf("23ï¼šLPAR\n");
 
-	printf("24£ºRPAR\n");
+	printf("24ï¼šRPAR\n");
 
-	printf("25£ºEQU\n");
+	printf("25ï¼šEQU\n");
 
-	printf("26£ºSEMI\n");
-	printf("27£ºLCUR\n");
-	printf("28£ºRCUR\n");
+	printf("26ï¼šSEMI\n");
+	printf("27ï¼šLCUR\n");
+	printf("28ï¼šRCUR\n");
 	printf("\n");
 
 	yyin=fopen("example.txt","r"); 
@@ -154,7 +154,7 @@ void main()
 
 	fclose(yyin);
 
-	system("PAUSE");/*ÔİÍ£Í£,  Ê¹DOS´°¿ÚÍ£×¡*/
+	system("PAUSE");/*æš‚åœåœ,  ä½¿DOSçª—å£åœä½*/
 
 } 
 
