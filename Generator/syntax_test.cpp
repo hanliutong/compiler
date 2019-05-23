@@ -9,7 +9,7 @@ extern int NUM;
 //char *test = "while a+c>b do while y<z do y = x; c=b; "; // true original:a>b -> (a+c)>b
 //char *test = "while a>b do if x2 + c = x3 then while y<z do y = x; c=b*r+y; "; // true
 //char *test = "c=b-k*y; ";//true 
-char *test = "while (15+a3)>x0a do if x2 = 07 then while y<z do y = x * y / 15; c=b*c+d; ";
+char *test = "while (15+a3)>x0a do if x2 = 07 then while y<z do y = x + y / 15; c=b*c+d; ";
 /*
 while a < b 
     do 
@@ -409,4 +409,9 @@ bool run(){
         cout <<"\tToken : "<< Token << endl;
         return false;
     }
+}
+
+int main() {
+    cout << run() << endl;
+    return 0;
 }
