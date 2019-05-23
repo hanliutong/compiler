@@ -6,20 +6,11 @@
 using namespace std;
 extern string IDN_NAME;
 extern int NUM;
-//char *test = "while a>b do while y<z do y = x; c=b; "; // true
-char *test = "while a>b do if x2 + c = x3 then while y<z do y = x; c=b+r-x+y; "; // true
 
-/*
-while a < b 
-    do 
-    while c>d 
-        do 
-        x = y;
-e = f;
-*/
+char *test = 
+"while (a3+15)>0xa do\n\tif x2 = 07 then\n\t\twhile y<z do\n\t\t\ty = x * y / z;\nc=b*c+d;\n";
+// char *test = "while (a3+15)>0xa do if x2 = 07 then while y<z do y = x * y / z; c=b*c+d;";
 
-// char *test = "if i = j then k = l  m < n while o = p do q = r "; //false because 'm < n' should be 'm = n'
-int flag = 0;
 int getNext(){
     return scan(test);
 }
@@ -47,6 +38,7 @@ bool S(AttrS &thisS);
 bool C(AttrC &thisC);
 bool E(AttrE &thisE);
 bool F(AttrF &thisF);
+bool E(AttrE &thisE);
 bool G(AttrG &thisG);
 bool N(AttrN &thisN);
 bool T(AttrT &thisT);
@@ -88,7 +80,6 @@ bool L(AttrL &thisL){
 }
 
 bool S(AttrS &thisS){
-    cout << thisS.father->getClass();
     AttrC attrC(&thisS);
     AttrS S1(&thisS);
     AttrS S2(&thisS);
@@ -156,7 +147,7 @@ bool S(AttrS &thisS){
             str += "L" + to_string(thisS.begin) + ": ";
         str += attrC.code;
         thisS.gen(str);
-        thisS.gen("L" + to_string(attrC.T)+ ": " + S1.code + "goto(S.b) L" + to_string(thisS.begin));
+        thisS.gen("L" + to_string(attrC.T)+ ": " + S1.code + "goto L" + to_string(thisS.begin));
         //flag--;
         return true;
         break;
@@ -222,8 +213,8 @@ bool C(AttrC &thisC){
     if(!E(E2))
         return false;
     thisC.code = E1.code + E2.code;
-    thisC.gen("if " + E1.place + op + E2.place + " goto(C.T) L" + to_string(thisC.T));
-    thisC.gen("goto(C.F) L" + to_string(thisC.F));
+    thisC.gen("if " + E1.place + op + E2.place + " goto L" + to_string(thisC.T));
+    thisC.gen("goto L" + to_string(thisC.F));
     return true;
 }
 
@@ -242,9 +233,10 @@ bool E(AttrE &thisE){
 	if(!N(N1))
 		return 0;
     if(!N1.place.empty())
-        thisE.place = N1.place;//t(x)
-    thisE.code=T1.code+N1.code;
-	return true;
+        thisE.place = N1.place;
+    thisE.code =T1.code + N1.code;
+        
+    return true;
 
 }
 
@@ -253,13 +245,14 @@ bool E(AttrE &thisE){
 bool T(AttrT &thisT){
 	AttrF F1(&thisT);
 	AttrG G1(&thisT);
-	// attrT.place=newTemp();
 	if(!F(F1))
 		return 0;
+	thisT.place = F1.place;
 	if(!G(G1))
 		return 0;
-    thisT.place=F1.place+G1.place;
-	thisT.code=F1.code+G1.code;
+	if(!G1.place.empty())
+        thisT.place = G1.place;  
+    thisT.code=F1.code+G1.code;
 	return true;
 }
 
@@ -268,7 +261,6 @@ bool N(AttrN &thisN){
 	AttrN N1(&thisN);
 	AttrE E1(&thisN);
 	string op;
-	//E1.temp=newTemp();
 	switch (Token)
 	{
 		case ADD:
@@ -294,32 +286,24 @@ bool N(AttrN &thisN){
 		default :
 			return true;//express NULL
 	}
-	// N1.code=T1.code+N1.code;
-	// thisN.gen("t"+to_string(E1.temp)+" := "+T1.place+op+N1.place);
-    thisN.gen(thisN.place+": "+ ((AttrE*)thisN.father)->place+op+T1.place);
-    thisN.code += N1.code;
+    thisN.gen(thisN.place+" := "+ ((AttrE*)thisN.father)->place+op+T1.place);
+    thisN.code += N1.code + T1.code;
     if(!N1.place.empty())
         thisN.place = N1.place;
     return true;
 }
-//
+
 bool G(AttrG &thisG){
 	AttrF F1(&thisG);
 	AttrG G1(&thisG);
 	AttrT T1(&thisG);
 	string op;
-	// T1.temp=newTemp();
 	switch (Token)
 	{
 		case MUL:
-            thisG.temp=newTemp();
+            thisG.place="t"+to_string(newTemp());
 			if(!eat(MUL))
 				return 0;
-//			eat(MUL);
-//			if(Token==SEMI){
-//				return false;
-//				break;
-//			}
 			op='*';
 			if(!F(F1))
 				return 0;
@@ -327,15 +311,10 @@ bool G(AttrG &thisG){
 				return 0;
 			break;
 		case DIV:
-            thisG.temp=newTemp();
+            thisG.place="t"+to_string(newTemp());
 			if(!eat(DIV))
 				return 0;
-
-			if(Token==SEMI){
-				return false;
-				break;
-			}
-			op='*';
+			op='/';
 			if(!F(F1))
 				return 0;
 			if(!G(G1))
@@ -344,15 +323,17 @@ bool G(AttrG &thisG){
 
 		default :
 			return true;//express NULL
+		
 	} 
-	G1.code=F1.code+G1.code;
-	thisG.gen("t"+to_string(T1.temp)+":="+G1.place+op+F1.place);
-	return true;
+	thisG.gen(thisG.place+" := "+ ((AttrT*)thisG.father)->place+op+F1.place);
+    thisG.code += G1.code;
+    if(!G1.place.empty())
+        thisG.place = G1.place;
+    return true;
 }
 //
 bool F(AttrF &thisF){
 	AttrE E1(&thisF);
-	AttrF F1(&thisF);
 	switch (Token)
 	{
 		case LPAR:
@@ -360,9 +341,9 @@ bool F(AttrF &thisF){
 				return 0;
 			if (!E(E1))
 				return 0;
-			F1.place=E1.place;
-			F1.code=E1.code;
-			if(!eat(RPAR))
+			thisF.place=E1.place;
+			thisF.code=E1.code;
+            if(!eat(RPAR))
 				return 0;
 			break;
 		case IDN:
@@ -370,15 +351,15 @@ bool F(AttrF &thisF){
 			return eat(IDN);
 			break;
 		case INT8:
-			thisF.place = NUM;
+			thisF.place = to_string(NUM);
 			return eat(INT8);
 			break;
 		case INT10:
-			thisF.place = NUM;
+			thisF.place = to_string(NUM);
 			return eat(INT10);
 			break;
 		case INT16:
-			thisF.place = NUM;
+			thisF.place = to_string(NUM);
 			return eat(INT16);
 			break;	
 		default:
@@ -399,4 +380,10 @@ bool run(){
         cout <<"\tToken : "<< Token << endl;
         return false;
     }
+}
+
+int main() {
+    cout << "input : \n" << test << endl;
+    cout << run() << endl;
+    return 0;
 }

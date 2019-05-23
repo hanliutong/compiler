@@ -81,7 +81,7 @@ int scan(char*& input){
         switch (state)
         {
         case 0:
-            if(cur == ' ')
+            if(cur == ' ' || cur == '\n' || cur == '\r' || cur == '\t')
                 state = 0;
             else if (cur == 'i')
                 state = 15;
